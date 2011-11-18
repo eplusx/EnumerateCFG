@@ -6,6 +6,7 @@ Test code for enumerate_small_sentences.
 
 import pytest
 import nltk
+from nltk.grammar import Nonterminal
 
 import enumerate_small_sentences as es
 
@@ -33,10 +34,21 @@ class TestEnumerateSmallSentences(object):
     def pytest_funcarg__gtong(self, request):
         return nltk.parse.load_parser('file:../grammars/tong.cfg').grammar()
 
-    def test_enumerate_Det(self, gsimple):
-        start = nltk.grammar.Nonterminal('Det')
-        sentences = es._enumerate(gsimple, [start], 1)
+    def test_enumerate_gsimple_Det(self, gsimple):
+        sentences = es._enumerate(gsimple, [Nonterminal('Det')], 1)
         assert sentences == ['the', 'a']
+
+    def test_enumerate_gsimple_N(self, gsimple):
+        sentences = es._enumerate(gsimple, [Nonterminal('N')], 1)
+        assert sentences == ['man', 'park', 'dog', 'telescope']
+
+    def test_enumerate_gsimple_V(self, gsimple):
+        sentences = es._enumerate(gsimple, [Nonterminal('V')], 1)
+        assert sentences == ['saw', 'walked']
+
+    def test_enumerate_gsimple_P(self, gsimple):
+        sentences = es._enumerate(gsimple, [Nonterminal('P')], 1)
+        assert sentences == ['in', 'with']
 
     def test_gsimple(self, gsimple):
         pytest.skip()
