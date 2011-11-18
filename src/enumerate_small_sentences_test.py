@@ -73,12 +73,14 @@ class TestEnumerateSmallSentences(object):
              'walked the telescope', 'walked a man', 'walked a park',
              'walked a dog', 'walked a telescope']
 
-    def test_gsimple(self, gsimple):
+    def test_gsimple_short(self, gsimple):
         assert_correct(gsimple, 0, 0)
         assert_correct(gsimple, 1, 0)
         assert_correct(gsimple, 2, 0)
         assert_correct(gsimple, 3, 0)
         assert_correct(gsimple, 4, 0)
+
+    def test_gsimple(self, gsimple):
         assert_correct(gsimple, 5, 0)
         assert_correct(gsimple, 6, 128)
         assert_correct(gsimple, 7, 128)
