@@ -31,7 +31,6 @@ def _enumerate(grammar, symbols, max_len, nest=0):
         else:
             for prod in grammar.productions(lhs=symbols[0]):
                 logger.debug(' ' * 2 * nest + 'REWRITE: {0}'.format(prod))
-#                n_max_len = max_len - len(prod.rhs()) + 1
                 if max_len >= len(prod.rhs()):
                     enum.extend(_enumerate(grammar, prod.rhs(), max_len, nest + 1))
     else:
