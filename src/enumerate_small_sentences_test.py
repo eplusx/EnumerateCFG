@@ -15,6 +15,7 @@ def setup_module(module):
     import logging
     handler = logging.StreamHandler()
     root_logger = logging.getLogger()
+    # Uncomment the next line to obtain a detailed trace log
 #    root_logger.setLevel(logging.DEBUG)
     root_logger.addHandler(handler)
 
@@ -27,11 +28,19 @@ def assert_shorter_than(sentences, length):
     for symbols in sentences:
         assert len(symbols) <= length
 
+
+def assert_parsable(grammar, sentences):
+    parser = nltk.parse.ChartParser(grammar)
+    for symbols in sentences:
+        assert parser.parse(symbols) is not None
+
+
 def assert_correct(grammar, length, count):
     sentences = es.enumerate(grammar, length)
     assert len(sentences) == count
     assert_unique(sentences)
     assert_shorter_than(sentences, length)
+    assert_parsable(grammar, sentences)
 
 
 class TestEnumerateSmallSentences(object):
