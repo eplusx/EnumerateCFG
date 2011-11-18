@@ -14,12 +14,12 @@ def _enumerate(grammar, symbols, max_len):
             enum.append(symbols[0])
         else:
             for prod in grammar.productions(lhs=symbols[0]):
-                n_max_len = max_len - len(prod.rhs()) + 1
-                if n_max_len >= 0:
-                    enum.extend(_enumerate(grammar, prod.rhs(), n_max_len))                    
+#                n_max_len = max_len - len(prod.rhs()) + 1
+                if max_len >= len(prod.rhs()):
+                    enum.extend(_enumerate(grammar, prod.rhs(), max_len))                    
     else:
         for first_symbol in _enumerate(grammar, [symbols[0]], max_len):
-            for other_symbols in _enumerate(grammar, symbols[1:], max_len-1):
+            for other_symbols in _enumerate(grammar, symbols[1:], max_len - len(first_symbol)):
                 enum.append(first_symbol + ' ' + other_symbols)
     return enum
 
@@ -34,5 +34,3 @@ if __name__ == "__main__":
         print sent
         
     print len(sentences)
-
-            
