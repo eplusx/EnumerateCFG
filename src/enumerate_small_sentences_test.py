@@ -4,6 +4,7 @@
 Test code for enumerate_small_sentences.
 """
 
+import pytest
 import nltk
 
 import enumerate_small_sentences as es
@@ -16,7 +17,6 @@ def assert_unique(sentences):
 def assert_shorter_than(sentences, length):
     for s in sentences:
         assert len(s.split()) <= length
-
 
 def assert_correct(grammar, length, count):
     sentences = es.enumerate(grammar, length)
@@ -33,7 +33,13 @@ class TestEnumerateSmallSentences(object):
     def pytest_funcarg__gtong(self, request):
         return nltk.parse.load_parser('file:../grammars/tong.cfg').grammar()
 
+    def test_enumerate_Det(self, gsimple):
+        start = nltk.grammar.Nonterminal('Det')
+        sentences = es._enumerate(gsimple, [start], 1)
+        assert sentences == ['the', 'a']
+
     def test_gsimple(self, gsimple):
+        pytest.skip()
         assert_correct(gsimple, 0, 0)
         assert_correct(gsimple, 1, 0)
         assert_correct(gsimple, 2, 0)
