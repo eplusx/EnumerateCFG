@@ -15,7 +15,7 @@ def assert_unique(sentences):
 
 def assert_shorter_than(sentences, length):
     for s in sentences:
-        assert len(s) <= length
+        assert len(s.split()) <= length
 
 
 def assert_correct(grammar, length, count):
