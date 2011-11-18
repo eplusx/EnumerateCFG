@@ -33,7 +33,7 @@ def _enumerate(grammar, symbols, max_len, nest=0):
         for first_symbol in _enumerate(grammar, [symbols[0]], max_len, nest + 1):
             logger.debug(' ' * 2 * nest + 'FIRST\':  {0}'.format(first_symbol))
             logger.debug(' ' * 2 * nest + 'OTHERS:  {0}'.format(symbols[1:]))
-            for other_symbols in _enumerate(grammar, symbols[1:], max_len - len(first_symbol), nest + 1):
+            for other_symbols in _enumerate(grammar, symbols[1:], max_len - len(first_symbol.split()), nest + 1):
                 logger.debug(' ' * 2 * nest + 'CONCAT:  {0} {1}'.format(
                              first_symbol, other_symbols))
                 enum.append(first_symbol + ' ' + other_symbols)
