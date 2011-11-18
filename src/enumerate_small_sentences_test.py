@@ -74,7 +74,6 @@ class TestEnumerateSmallSentences(object):
              'walked a dog', 'walked a telescope']
 
     def test_gsimple(self, gsimple):
-        pytest.skip()
         assert_correct(gsimple, 0, 0)
         assert_correct(gsimple, 1, 0)
         assert_correct(gsimple, 2, 0)

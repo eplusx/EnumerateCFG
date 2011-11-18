@@ -41,7 +41,7 @@ def _enumerate(grammar, symbols, max_len, nest=0):
                 logger.debug(' ' * 2 * nest + 'CONCAT:  {0} {1}'.format(
                              first_symbol, other_symbols))
                 enum.append(first_symbol + other_symbols)
-    logger.debug(' ' * 2 * nest + 'RETURN:  {0}'.format(enum))
+    logger.debug(' ' * 2 * nest + 'RETURN:  {0} as {1}'.format(enum, symbols))
     return enum
 
 if __name__ == "__main__":
