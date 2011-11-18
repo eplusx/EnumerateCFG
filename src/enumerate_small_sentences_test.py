@@ -90,6 +90,14 @@ class TestEnumerateSmallSentences(object):
         assert_correct(gsimple, 100, 128)
         assert_correct(gsimple, 1000, 128)
 
+    def test_enumerate_gtong_PropN(self, gtong):
+        sentences = es._enumerate(gtong, [Nonterminal('PropN')], 1)
+        assert es.flattened(sentences) == ['John', 'Mary']
+
+    def test_enumerate_gtong_IVsing(self, gtong):
+        sentences = es._enumerate(gtong, [Nonterminal('IVsing')], 1)
+        assert es.flattened(sentences) == ['walks', 'lives']
+
 
 def main():
     pytest.main(args=[__file__.replace('.pyc', '.py')])
