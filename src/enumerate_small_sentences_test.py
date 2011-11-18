@@ -44,24 +44,25 @@ class TestEnumerateSmallSentences(object):
 
     def test_enumerate_gsimple_Det(self, gsimple):
         sentences = es._enumerate(gsimple, [Nonterminal('Det')], 1)
-        assert sentences == ['the', 'a']
+        assert es.flattened(sentences) == ['the', 'a']
 
     def test_enumerate_gsimple_N(self, gsimple):
         sentences = es._enumerate(gsimple, [Nonterminal('N')], 1)
-        assert sentences == ['man', 'park', 'dog', 'telescope']
+        assert es.flattened(sentences) == ['man', 'park', 'dog', 'telescope']
 
     def test_enumerate_gsimple_V(self, gsimple):
         sentences = es._enumerate(gsimple, [Nonterminal('V')], 1)
-        assert sentences == ['saw', 'walked']
+        assert es.flattened(sentences) == ['saw', 'walked']
 
     def test_enumerate_gsimple_P(self, gsimple):
         sentences = es._enumerate(gsimple, [Nonterminal('P')], 1)
-        assert sentences == ['in', 'with']
+        assert es.flattened(sentences) == ['in', 'with']
 
     def test_enumerate_gsimple_NP(self, gsimple):
         sentences = es._enumerate(gsimple, [Nonterminal('NP')], 2)
-        assert sentences == ['the man', 'the park', 'the dog', 'the telescope',
-                             'a man', 'a park', 'a dog', 'a telescope']
+        assert es.flattened(sentences) == \
+            ['the man', 'the park', 'the dog', 'the telescope',
+             'a man', 'a park', 'a dog', 'a telescope']
 
     def test_gsimple(self, gsimple):
         pytest.skip()

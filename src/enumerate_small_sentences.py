@@ -10,6 +10,10 @@ import logging
 logger = logging.getLogger('enumerate')
 
 
+def flattened(sentences, delimiter=' '):
+    return [delimiter.join(symbols) for symbols in sentences]
+
+
 def enumerate(grammar, max_len):
     return _enumerate(grammar, [grammar.start()], max_len)
 
@@ -19,7 +23,7 @@ def _enumerate(grammar, symbols, max_len, nest=0):
         logger.debug(' ' * 2 * nest + 'SYMBOL:  {0} (max_len {1})'.format(
                      symbols[0], max_len))
         if isinstance(symbols[0], str):
-            enum.append(symbols[0])
+            enum.append([symbols[0]])
         else:
             for prod in grammar.productions(lhs=symbols[0]):
                 logger.debug(' ' * 2 * nest + 'REWRITE: {0}'.format(prod))
@@ -33,10 +37,10 @@ def _enumerate(grammar, symbols, max_len, nest=0):
         for first_symbol in _enumerate(grammar, [symbols[0]], max_len, nest + 1):
             logger.debug(' ' * 2 * nest + 'FIRST\':  {0}'.format(first_symbol))
             logger.debug(' ' * 2 * nest + 'OTHERS:  {0}'.format(symbols[1:]))
-            for other_symbols in _enumerate(grammar, symbols[1:], max_len - len(first_symbol.split()), nest + 1):
+            for other_symbols in _enumerate(grammar, symbols[1:], max_len - len(first_symbol), nest + 1):
                 logger.debug(' ' * 2 * nest + 'CONCAT:  {0} {1}'.format(
                              first_symbol, other_symbols))
-                enum.append(first_symbol + ' ' + other_symbols)
+                enum.append(first_symbol + other_symbols)
     logger.debug(' ' * 2 * nest + 'RETURN:  {0}'.format(enum))
     return enum
 
