@@ -20,12 +20,12 @@ def setup_module(module):
 
 
 def assert_unique(sentences):
-    assert len(sentences) == len(set(sentences))
+    assert len(sentences) == len(set(es.flattened(sentences)))
 
 
 def assert_shorter_than(sentences, length):
-    for s in sentences:
-        assert len(s.split()) <= length
+    for symbols in sentences:
+        assert len(symbols) <= length
 
 def assert_correct(grammar, length, count):
     sentences = es.enumerate(grammar, length)
@@ -84,6 +84,8 @@ class TestEnumerateSmallSentences(object):
         assert_correct(gsimple, 7, 128)
         assert_correct(gsimple, 8, 128)
         assert_correct(gsimple, 9, 128)
+
+    def test_gsimple_long(self, gsimple):
         assert_correct(gsimple, 10, 128)
         assert_correct(gsimple, 100, 128)
         assert_correct(gsimple, 1000, 128)
