@@ -53,9 +53,9 @@ if __name__ == "__main__":
     
     grammar = nltk.parse.load_parser('file:../grammars/tong.cfg').grammar()
     
-    sentences = enumerate(grammar, 7) 
+    sentences = enumerate(grammar, 4) 
     
-    for sent in sentences:
+    for sent in flattened(sentences):
         print sent
         
     print len(sentences)
