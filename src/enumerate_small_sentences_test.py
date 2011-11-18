@@ -50,6 +50,11 @@ class TestEnumerateSmallSentences(object):
         sentences = es._enumerate(gsimple, [Nonterminal('P')], 1)
         assert sentences == ['in', 'with']
 
+    def test_enumerate_gsimple_NP(self, gsimple):
+        sentences = es._enumerate(gsimple, [Nonterminal('NP')], 2)
+        assert sentences == ['the man', 'the park', 'the dog', 'the telescope',
+                             'a man', 'a park', 'a dog', 'a telescope']
+
     def test_gsimple(self, gsimple):
         pytest.skip()
         assert_correct(gsimple, 0, 0)
