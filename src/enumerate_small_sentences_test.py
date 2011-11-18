@@ -11,6 +11,14 @@ from nltk.grammar import Nonterminal
 import enumerate_small_sentences as es
 
 
+def setup_module(module):
+    import logging
+    handler = logging.StreamHandler()
+    root_logger = logging.getLogger()
+    root_logger.setLevel(logging.DEBUG)
+    root_logger.addHandler(handler)
+
+
 def assert_unique(sentences):
     assert len(sentences) == len(set(sentences))
 
