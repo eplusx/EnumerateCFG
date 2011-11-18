@@ -126,8 +126,9 @@ class TestEnumerateSmallSentences(object):
     def test_gtong_6(self, gtong):
         assert_correct(gtong, 6, 5048)  # not manually counted
 
-    def test_gtong_7(self, gtong):
-        assert_correct(gtong, 7, 43448)  # not manually counted
+    # Time-consuming
+#    def test_gtong_7(self, gtong):
+#        assert_correct(gtong, 7, 43448)  # not manually counted
 
 
 def main():
