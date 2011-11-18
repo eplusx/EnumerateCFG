@@ -18,6 +18,10 @@ def enumerate(grammar, max_len):
     return _enumerate(grammar, [grammar.start()], max_len)
 
 def _enumerate(grammar, symbols, max_len, nest=0):
+    if len(symbols) > max_len:
+        # Under the assumption that all nonterminals are finally rewritten with
+        # at least 1 symbol.
+        return []
     enum = []
     if len(symbols) == 1:
         logger.debug(' ' * 2 * nest + 'SYMBOL:  {0} (max_len {1})'.format(
