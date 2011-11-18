@@ -64,6 +64,15 @@ class TestEnumerateSmallSentences(object):
             ['the man', 'the park', 'the dog', 'the telescope',
              'a man', 'a park', 'a dog', 'a telescope']
 
+    def test_enumerate_gsimple_VP(self, gsimple):
+        sentences = es._enumerate(gsimple, [Nonterminal('VP')], 3)
+        assert es.flattened(sentences) == \
+            ['saw the man', 'saw the park', 'saw the dog', 'saw the telescope',
+             'saw a man', 'saw a park', 'saw a dog', 'saw a telescope',
+             'walked the man', 'walked the park', 'walked the dog',
+             'walked the telescope', 'walked a man', 'walked a park',
+             'walked a dog', 'walked a telescope']
+
     def test_gsimple(self, gsimple):
         pytest.skip()
         assert_correct(gsimple, 0, 0)
