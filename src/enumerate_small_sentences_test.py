@@ -15,7 +15,7 @@ def setup_module(module):
     import logging
     handler = logging.StreamHandler()
     root_logger = logging.getLogger()
-    root_logger.setLevel(logging.DEBUG)
+#    root_logger.setLevel(logging.DEBUG)
     root_logger.addHandler(handler)
 
 
@@ -99,6 +99,26 @@ class TestEnumerateSmallSentences(object):
     def test_enumerate_gtong_IVsing(self, gtong):
         sentences = es._enumerate(gtong, [Nonterminal('IVsing')], 1)
         assert es.flattened(sentences) == ['walks', 'lives']
+
+    def test_gtong_short(self, gtong):
+        assert_correct(gtong, 0, 0)
+        assert_correct(gtong, 1, 0)
+        assert_correct(gtong, 2, 0)
+
+    def test_gtong_3(self, gtong):
+        assert_correct(gtong, 3, 40)
+
+    def test_gtong_4(self, gtong):
+        assert_correct(gtong, 4, 440)  # not manually counted
+
+    def test_gtong_5(self, gtong):
+        assert_correct(gtong, 5, 568)  # not manually counted
+
+    def test_gtong_6(self, gtong):
+        assert_correct(gtong, 6, 5048)  # not manually counted
+
+    def test_gtong_7(self, gtong):
+        assert_correct(gtong, 7, 43448)  # not manually counted
 
 
 def main():
