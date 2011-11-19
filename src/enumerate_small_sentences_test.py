@@ -58,6 +58,12 @@ class TestEnumerateSmallSentences(object):
                              ['my', 'pencil']]) \
             == ['an apple', 'the orange', 'my pencil']
 
+    def test_flattened_sentenses(self):
+        assert es.flattened(['the', 'fox', 'jumps']) == 'the fox jumps'
+        assert es.flattened(['the', 'quick', 'brown', 'fox', 'jumps', 'over',
+                             'the', 'lazy', 'dog']) \
+                             == 'the quick brown fox jumps over the lazy dog'
+
     def test_enumerate_gsimple_Det(self, gsimple):
         sentences = es._enumerate(gsimple, [Nonterminal('Det')], 1)
         assert es.flattened(sentences) == ['the', 'a']
