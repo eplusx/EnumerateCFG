@@ -10,8 +10,14 @@ import logging
 logger = logging.getLogger('enumerate')
 
 
-def flattened(sentences, delimiter=' '):
-    return [delimiter.join(symbols) for symbols in sentences]
+def flattened(sent, delimiter=' '):
+    try:
+        if isinstance(sent[0], str):
+            return delimiter.join(sent)
+        else:
+            return [delimiter.join(symbols) for symbols in sent]
+    except IndexError:
+        return sent
 
 
 def enumerate(grammar, max_len):

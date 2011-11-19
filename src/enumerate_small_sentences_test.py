@@ -58,7 +58,7 @@ class TestEnumerateSmallSentences(object):
                              ['my', 'pencil']]) \
             == ['an apple', 'the orange', 'my pencil']
 
-    def test_flattened_sentenses(self):
+    def test_flattened_sentense(self):
         assert es.flattened(['the', 'fox', 'jumps']) == 'the fox jumps'
         assert es.flattened(['the', 'quick', 'brown', 'fox', 'jumps', 'over',
                              'the', 'lazy', 'dog']) \
