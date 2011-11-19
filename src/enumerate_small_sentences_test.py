@@ -51,6 +51,13 @@ class TestEnumerateSmallSentences(object):
     def pytest_funcarg__gtong(self, request):
         return nltk.parse.load_parser('file:../grammars/tong.cfg').grammar()
 
+    def test_flattened_sentenses(self):
+        assert es.flattened([['the', 'fox', 'jumps'], ['a', 'man', 'walks']]) \
+            == ['the fox jumps', 'a man walks']
+        assert es.flattened([['an', 'apple'], ['the', 'orange'],
+                             ['my', 'pencil']]) \
+            == ['an apple', 'the orange', 'my pencil']
+
     def test_enumerate_gsimple_Det(self, gsimple):
         sentences = es._enumerate(gsimple, [Nonterminal('Det')], 1)
         assert es.flattened(sentences) == ['the', 'a']
